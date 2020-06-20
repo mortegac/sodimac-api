@@ -18,7 +18,7 @@
     "jest": "^20.0.4"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.19.2",
     "supertest": "^4.0.2"
   }
 }
