@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css">
+    <title>Document</title>
+    <!-- https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css -->
+
+</head>
+<body>
+    
+    <div class="content is-large">
+        <h1>Responsive Galery</h1>
+        <p>ejemplo de galeria haciendo fetch a la api</p>
+    </div>
+    <div id="galery" class="columns is-multiline">
+        <!-- 
+        <div class="column is-one-quarter-desktop is-half-tablet">
+            <div class="card">
+                <figure class="image is-3by2">
+                    <img src="https://unsplash.it/300/200/?random&pic=1" alt="">
+                </figure>
+                <div class="card-content is-overlay is-clipped">
+                    <span class="tag is-info">Esta es una Imagen</span>
+                </div>
+            </div>
+        </div> 
+    -->
+    </div>
+    <script>
+    const getImages = ()=>{
+     // fetch == axios
+     // fetch(URL)
+    //  .then( (response)=> response.json() ) 
+    //  .then( (images) =>{  // logica de generar las imagenes })
+        //http://localhost:3000/images
+     fetch("http://localhost:3000/images")
+     .then((response)=>{
+        return response.json();
+     })
+     .then((images)=>{
+        console.log(images);
+
+        // Distintas formas de escribir arrow function
+        // (param1, params2) =>{ return ...codigo; ...codigo; ...codigo }
+        // (param1, params2) => ...codigo
+        // param1 => ...codigo
+
+
+        document.getElementById("galery").innerHTML= images.map( image => `<div class="column is-one-quarter-desktop is-half-tablet">
+            <div class="card">
+                <figure class="image is-3by2">
+                    <img src="${image.download_url}" alt="">
+                </figure>
+                <div class="card-content is-overlay is-clipped">
+                    <span class="tag is-info">${image.author}</span>
+                </div>
+            </div>
+        </div>`
+        ).join('')
+
+     })
+    }
+
+    getImages();
+    </script>
+
+</body>
+</html>
